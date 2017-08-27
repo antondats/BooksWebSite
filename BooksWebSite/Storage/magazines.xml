@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<magazines>
+  <magazine id="1">
+    <name>Newsweek</name>
+    <number>12</number>
+    <date>12.08.2018 0:00:00</date>
+  </magazine>
+  <magazine id="2">
+    <name>Time</name>
+    <number>112</number>
+    <date>18.08.2017 0:00:00</date>
+  </magazine>
+</magazines>

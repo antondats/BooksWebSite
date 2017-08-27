@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<brochures>
+  <brochure id="1">
+    <name>Some Brochure</name>
+    <author>Anton Datsenko</author>
+    <cover>Green</cover>
+    <pages>15</pages>
+  </brochure>
+  <brochure id="2">
+    <name>Nice</name>
+    <author>Author Author</author>
+    <cover>Blue</cover>
+    <pages>21</pages>
+  </brochure>
+  <brochure id="3">
+    <name>Copybook</name>
+    <author>Undefined</author>
+    <cover>Red</cover>
+    <pages>60</pages>
+  </brochure>
+</brochures>

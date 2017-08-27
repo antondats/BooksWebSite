@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Books and Magazines";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/CSS/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/CSS/justified-nav.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.621/styles/kendo.blueopal.min.css" />
+
+    <script src="http://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="masthead">
+            <h3 class="text-muted">Books and magazines</h3>
+
+            @Html.Partial("Menu")
+        </div>
+
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+
+            All subjects:
+
+
+            <div id="grid"></div>
+            
+        </div>
+        <footer class="footer">
+            <p>&copy; Company 2017</p>
+        </footer>
+
+    </div>
+ 
+    <script>
+        $(document).ready(function () {
+
+            var maxPage = 1;
+
+            function onPaging(arg) {
+                var info = { page: arg.page };
+                if (info.page > maxPage) {
+                    maxPage = info.page;
+                    $.ajax({
+                        url: "/Home/GetData",
+                        data: info,
+                        dataType: "json",
+                        success: function (result) {
+                            
+                            for (var i = 0; i < result.Data.length; i++) {
+                                $("#grid").data("kendoGrid").dataSource.add(
+                                    {
+                                        Name: result.Data[i].Name,
+                                        Type: result.Data[i].Type
+                                    });
+                            }
+                            $("#grid").data("kendoGrid").dataSource.page(result.CurrentPage);
+                        }
+                    });
+                }
+            }
+
+            $.ajax({
+                url: "/Home/GetData",
+                success: function (result) {
+
+                    var ds = new kendo.data.DataSource({
+                        data: result.Data,
+                        pageSize: result.ItemPerPage
+                    });
+                    ds.total = function () {
+                        return result.Total;
+                    }
+
+                    $("#grid").kendoGrid({
+                        columns: [{
+                            field: "Name",
+                            title: "Title"
+                        },
+                        {
+                            field: "Type",
+                            title: "Type"
+                        }],
+                        dataSource: ds,
+                        page: onPaging,
+                        sortable: true,
+                        pageable: {
+                            buttonCount: 5
+                        },
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

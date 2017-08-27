@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<books>
+  <book id="1">
+    <name>The Book Thief</name>
+    <author>Markus Zusak</author>
+    <yearOfWriting>2006</yearOfWriting>
+  </book>
+  <book id="2">
+    <name>The Surgeon</name>
+    <author>Tess Gerritsen</author>
+    <yearOfWriting>2002</yearOfWriting>
+  </book>
+</books>
